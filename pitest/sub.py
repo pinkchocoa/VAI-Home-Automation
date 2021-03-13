@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqtt
 
-MQTTBROKER = "iot.eclipse.org"
+MQTTBROKER = "mqtt.eclipse.org"
 PORT = 1883
 
 def on_connect(client, userdata, flags, rc):

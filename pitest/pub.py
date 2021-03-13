@@ -1,6 +1,6 @@
 import paho.mqtt.client as mqtt
 
-MQTTBROKER="mqtt.eclipse.org"
+MQTTBROKER="test.mosquitto.org"
 PORT=1883
 TOPIC="home/doorbell"
 MESSAGE="HelloWorld"

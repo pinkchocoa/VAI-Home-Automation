@@ -12,7 +12,7 @@ you should see the version being python 3.7
 
 then install paho mqtt that we are using
 
-$ pip3 install paho-mqtt
+$ pip3 install paho-mqtt python-etcd
 
 
 

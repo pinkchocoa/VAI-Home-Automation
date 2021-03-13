@@ -2,7 +2,7 @@ hello instructions for set up
 
 first u need to update ur pi
 
-$ sudo apt get update
+$ sudo apt-get update
 
 then check that you have at least python 3.7 installed
 

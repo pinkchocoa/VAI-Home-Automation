@@ -19,7 +19,24 @@ replace '1' with number of your choice if necessary
 to test the sound you can play some wav files that should already exist in your pi
 $ aplay /usr/share/scratch/Media/Sounds/Vocals/Singer2.wav
 
+3.1 troubleshooting, force it to set analog as default sound card
+$ sudo nano /etc/asound.conf
+content in file:
+defaults.pcm.card 1
+defaults.ctl.card 1
+
+3.2 troubleshooting, force it to set analog as default sound card via pulseaudio
+$ pacmd set-default-sink 1
+
+3.3 troubleshooting, please sudo reboot your pi
+3.4 troubleshooting, please make sure u plug in the speaker properly
+take it out and plug it back in.
+
 4. get it to say stuff
 for this we will be using espeak
 $ sudo apt-get install espeak
 $ espeal "aaaaaa hello world" 2>/dev/null
+
+5. for usage in your own python files, add the following lines:
+"from speakText import speakText"
+"speakText("what u want to say")"

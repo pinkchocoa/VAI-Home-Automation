@@ -6,8 +6,24 @@ from time import sleep
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
-LED_PIN1 = 16
-GPIO.setup(LED_PIN1, GPIO.OUT)
+#set red,green and blue pins
+redPin = 5
+greenPin = 6
+bluePin = 13
+#set pins as outputs
+GPIO.setup(redPin,GPIO.OUT)
+GPIO.setup(greenPin,GPIO.OUT)
+GPIO.setup(bluePin,GPIO.OUT)
+
+def turnOff():
+    GPIO.output(redPin,GPIO.HIGH)
+    GPIO.output(greenPin,GPIO.HIGH)
+    GPIO.output(bluePin,GPIO.HIGH)
+    
+def white():
+    GPIO.output(redPin,GPIO.LOW)
+    GPIO.output(greenPin,GPIO.LOW)
+    GPIO.output(bluePin,GPIO.LOW)
 
 PUSH_BTN = 18
 GPIO.setup(PUSH_BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -28,7 +44,7 @@ while True:
     
     if buttonPress == False and ledState == False:
         
-        GPIO.output(LED_PIN1, True)
+        white()
   
         ledState = True
         
@@ -39,12 +55,12 @@ while True:
         time.sleep(1)
         
     elif buttonPress == False and ledState == True:
-        GPIO.output(LED_PIN1, False)
+        turnOff()
   
         ledState = False
         
         MESSAGE = 'Off'
-        mqttc.publish(TOPIC, MESSAGE)
+        mqttc.publish(TOPIC,MESSAGE)
         print('Published to ' + MQTTBROKER + ': ' + TOPIC + ':' + MESSAGE)
         time.sleep(1)
 

@@ -3,10 +3,11 @@ import os
 from time import sleep
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
+
 host_name = '172.20.10.3'  # Change this to your Raspberry Pi IP address
 host_port = 8000
 
-
+    
 class MyServer(BaseHTTPRequestHandler):
     """ A special implementation of BaseHTTPRequestHander for reading data from
         and control GPIO of a Raspberry Pi
@@ -47,18 +48,29 @@ class MyServer(BaseHTTPRequestHandler):
         temp = os.popen("/opt/vc/bin/vcgencmd measure_temp").read()
         self.do_HEAD()
         status = ''
+        redPin = 5
+        greenPin = 6
+        bluePin = 13
         if self.path=='/':
             GPIO.setmode(GPIO.BCM)
             GPIO.setwarnings(False)
-            GPIO.setup(6, GPIO.OUT)
+            #set pins as outputs
+            GPIO.setup(redPin,GPIO.OUT)
+            GPIO.setup(greenPin,GPIO.OUT)
+            GPIO.setup(bluePin,GPIO.OUT)
+
             GPIO.setmode(GPIO.BCM)
             GPIO.setwarnings(False)
             GPIO.setup(20, GPIO.OUT)
         elif self.path=='/led/on':
-            GPIO.output(6, GPIO.LOW)
+            GPIO.output(redPin,GPIO.LOW)
+            GPIO.output(greenPin,GPIO.LOW)
+            GPIO.output(bluePin,GPIO.LOW)
             status='LED is On'
         elif self.path=='/led/off':
-            GPIO.output(6, GPIO.HIGH)
+            GPIO.output(redPin,GPIO.HIGH)
+            GPIO.output(greenPin,GPIO.HIGH)
+            GPIO.output(bluePin,GPIO.HIGH)
             status='LED is Off'
         elif self.path=='/fan/on':
             GPIO.output(20, GPIO.LOW)

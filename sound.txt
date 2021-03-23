@@ -1,0 +1,25 @@
+the speaker that we are using is connected to the pi via analog
+im using alsamixer that is already pre installed in our pi
+
+1. change the sound card to the analog's
+$ alsamixer
+$ f6
+$ pick analog
+
+2. the speaker volume is way too soft and u can barely hear at 100%, so lets bump it up
+(remember to do ur apt-get update/upgrade)
+(best to reboot after all these)
+$ sudo apt-get install pulseaudio pavucontrol
+$ pact1 list | grep 'Sink'
+above command list ur sound interfaces, it should be '1' for your analog interface by default
+$ pactl -- set-sink-volume 1 +200%
+replace '1' with number of your choice if necessary
+
+3. test sound
+to test the sound you can play some wav files that should already exist in your pi
+$ aplay /usr/share/scratch/Media/Sounds/Vocals/Singer2.wav
+
+4. get it to say stuff
+for this we will be using espeak
+$ sudo apt-get install espeak
+$ espeal "aaaaaa hello world" 2>/dev/null

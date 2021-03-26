@@ -5,6 +5,14 @@ import signal
 
 
 def recordSound(output, duration):
+
+	def stopRec(p, duration):
+		time.sleep(duration)
+		print("stop recording pid: " + str(p.pid))
+		os.killpg(p.pid, signal.SIGTERM)
+		p.terminate()
+		p = None
+
 	record = 'arecord --format=S16_LE --rate=16000 --file-type=wav '
 	record += output
 	record += '.wav'
@@ -12,11 +20,7 @@ def recordSound(output, duration):
 	p = subprocess.Popen(record, shell=True, preexec_fn=os.setsid)
 	print("startRecordingArecord()> p pid= " + str(p.pid))
 	print("startRecordingArecord()> recording started")
-	time.sleep(duration)
-	os.killpg(p.pid, signal.SIGTERM)
-	p.terminate()
-	p = None
-	print("stopRecordingArecord()> Recording stopped")
+	stopRec(p, duration)
 
 def playSound(input):
 	arg = 'aplay '

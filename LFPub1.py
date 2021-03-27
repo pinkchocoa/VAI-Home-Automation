@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 import time
 from time import sleep
 from audio.micRec import micRec
+from audio.speakText import speakText
 
 def checkVoiceInput(said, inputs):
     
@@ -64,7 +65,7 @@ fanState = False
 while True:
     LightButtonPress = GPIO.input(LIGHT_BTN)
     FanButtonPress = GPIO.input(FAN_BTN)
-
+    
     said = micRec(3)
     if checkVoiceInput(said, ['light', 'on']):
    # if 'light' in said and 'on' in said:

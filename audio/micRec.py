@@ -20,7 +20,7 @@ def micRec():
     with sr.Microphone() as source:
     	r.adjust_for_ambient_noise(source)  # listen for 1 second to calibrate the energy threshold for ambient noise levels
     	print("Say something!")
-    	audio = r.listen(source)
+    	audio = r.listen(source, phrase_time_limit=10)
     return googleRec(audio)
 
 print(micRec())

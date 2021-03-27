@@ -9,9 +9,12 @@ def micRec():
             # instead of `r.recognize_google(audio)`
             return r.recognize_google(audio)
         except sr.UnknownValueError:
-            return "Failed to recognise audio"
+            # "Failed to recognise audio"
+            return None
         except sr.RequestError as e:
-            return "Google request failed"
+            # "Google request failed"
+            return None
+
     # obtain audio from the microphone
     r = sr.Recognizer()
     with sr.Microphone() as source:

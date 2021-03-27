@@ -75,5 +75,14 @@ to do...
 how to transfer file tho
 > can we reuse FTP from assignment????
 
+mic rec
+1. installations
+$ pip3 install PyAudio
+$ pip3 install SpeechRecognition
+$ sudo apt-get install flac
 
+2. how to use
+"import micRec from micRec.py"
+"micRec()"
+function returns what it heard
 

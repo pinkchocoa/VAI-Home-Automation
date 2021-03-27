@@ -2,7 +2,6 @@ import paho.mqtt.client as mqtt
 import RPi.GPIO as GPIO
 import time
 from time import sleep
-from audio.speakText import speakText
 
 GPIO.setmode(GPIO.BCM)
 
@@ -42,23 +41,20 @@ def on_message(client, userdata, msg):
     txt = str(msg.payload)
     txt = txt.split("'")[1]
     print("txt: ", txt)
-    if txt == 'Light On':
+    if txt == 'LOn':
         print("test")
         white()
-        speakText(txt)
         
-    elif txt == 'Light Off':
+        
+    elif txt == 'LOff':
         print("anything")
         turnOff()
-        speakText(txt)
         
-    elif txt == 'Fan On':
+    elif txt == 'FOn':
         GPIO.output(FAN_PIN2, GPIO.HIGH)
-        speakText(txt)
     
-    elif txt == 'Fan Off':
+    elif txt == 'FOff':
         GPIO.output(FAN_PIN2, GPIO.LOW)
-        speakText(txt)
         
     print(MQTTBROKER + ': <' + msg.topic + '> :' + str(msg.payload))
     

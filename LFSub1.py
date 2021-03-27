@@ -13,6 +13,9 @@ GPIO.setup(redPin,GPIO.OUT)
 GPIO.setup(greenPin,GPIO.OUT)
 GPIO.setup(bluePin,GPIO.OUT)
 
+FAN_PIN2 = 16
+GPIO.setup(FAN_PIN2, GPIO.OUT)
+
 def turnOff():
     GPIO.output(redPin, GPIO.HIGH)
     GPIO.output(greenPin, GPIO.HIGH)
@@ -41,9 +44,11 @@ def on_message(client, userdata, msg):
     if txt == 'Off':
         print("test")
         turnOff()
+         GPIO.output(FAN_PIN2, GPIO.HIGH)
     elif txt == 'On':
         print("anything")
         white()
+         GPIO.output(FAN_PIN2, GPIO.LOW)
     print(MQTTBROKER + ': <' + msg.topic + '> :' + str(msg.payload))
     
 client = mqtt.Client()

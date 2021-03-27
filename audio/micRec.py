@@ -1,6 +1,6 @@
 import speech_recognition as sr
 
-def micRec():
+def micRec(timeOut):
     def googleRec(audio):
         # recognize speech using Google Speech Recognition
         try:
@@ -20,7 +20,6 @@ def micRec():
     with sr.Microphone() as source:
     	r.adjust_for_ambient_noise(source)  # listen for 1 second to calibrate the energy threshold for ambient noise levels
     	print("Say something!")
-    	audio = r.listen(source, phrase_time_limit=10)
+    	audio = r.listen(source, phrase_time_limit=timeOut)
     return googleRec(audio)
 
-print(micRec())

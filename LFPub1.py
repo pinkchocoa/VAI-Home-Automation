@@ -101,7 +101,7 @@ GPIO.setup(FAN_BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 MQTTBROKER = 'test.mosquitto.org'
 PORT = 1883
 TOPIC = 'home/light'
-MESSAGE = 'ON'
+MESSAGE = 'CONNECTED'
 mqttc = mqtt.Client('python_pub')
 mqttc.connect(MQTTBROKER, PORT)
 mqttc.publish(TOPIC, MESSAGE)
@@ -115,21 +115,21 @@ fanState = False
 while True:
     #Light
     print (RCtime(17))
-    
     #Fan
     temperature = read_temp()
-    
-    print(round(temperature, 2), "C")
-    time.sleep(1)
-    
+    print(round(temperature, 1), "C")
+    time.sleep(2)
+    ledState = False
+    fanState = True
     said = micRec(3)
-    if checkVoiceInput(said, ['light', 'on']) or (RCtime(17)) > 6000:
+    if checkVoiceInput(said, ['light', 'on']):
         white()
         MESSAGE = 'Light On'
         mqttc.publish(TOPIC, MESSAGE)
         print('Published to ' + MQTTBROKER + ': ' + TOPIC + ':' + MESSAGE)
         time.sleep(1)
-    
+        
+            
     elif checkVoiceInput(said, ["light", "off"]):
     #if 'light' in micRec() and 'off' in micRec():
         turnOff()
@@ -137,6 +137,7 @@ while True:
         mqttc.publish(TOPIC,MESSAGE)
         print('Published to ' + MQTTBROKER + ': ' + TOPIC + ':' + MESSAGE)
         time.sleep(1)
+        
     
     elif checkVoiceInput(said, ["fan", "on"]):
         
@@ -158,9 +159,10 @@ while True:
         MESSAGE = 'Record Voice'
         speakText('recording voice')
         recordSound('output', 10)
+        speakText('message sent')
         MESSAGE += transribeSound('output')
         mqttc.publish(TOPIC, MESSAGE)
         print('Published to ' + MQTTBROKER + ': ' + TOPIC + ':' + MESSAGE)
         time.sleep(1)
         
-mqttc.loop(2)
+mqttc.loop(1)

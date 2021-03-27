@@ -35,7 +35,10 @@ def transribeSound(input, path="/home/pi/"):
 	with sr.AudioFile(audioFile) as source:
 		audio = r.record(source) #read audio file
 	try:
-		return r.recognize_google(audio)
+		txt =  r.recognize_google(audio)
+		txt = txt.replace("'", "")
+		txt = txt.replace('"', '')
+		return txt
 	except sr.UnknownValueError:
 		return " " #cannot understand audio ):
 	except sr.RequestError as e:

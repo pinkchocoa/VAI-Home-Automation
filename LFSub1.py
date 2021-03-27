@@ -54,6 +54,9 @@ def on_message(client, userdata, msg):
     
     elif txt == 'Fan Off':
         GPIO.output(FAN_PIN2, GPIO.LOW)
+    elif 'Record Voice' in txt:
+        speakText(txt)
+        
         
     print(MQTTBROKER + ': <' + msg.topic + '> :' + str(msg.payload))
     

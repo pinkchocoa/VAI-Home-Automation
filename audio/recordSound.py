@@ -26,6 +26,9 @@ def playSound(input, path="~/"):
 	print("playing: " + arg)
 	subprocess.call(arg, shell=True)
 
+def transribeSound(input, path="~/"):
+    #to be done
+    return "hello world"
 
-recordSound('out', 5)
-playSound('out')
+#recordSound('out', 5)
+#playSound('out')

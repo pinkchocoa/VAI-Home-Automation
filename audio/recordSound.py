@@ -2,7 +2,7 @@ import subprocess
 import os 
 import time
 import signal
-
+import speech_recognition as sr
 
 def recordSound(output, duration, path="~/"):
 
@@ -26,9 +26,21 @@ def playSound(input, path="~/"):
 	print("playing: " + arg)
 	subprocess.call(arg, shell=True)
 
-def transribeSound(input, path="~/"):
-    #to be done
-    return "hello world"
+def transribeSound(input, path="/home/pi/"):
+	#to be done
+	#audioFile = os.path.join(path+input+'.wav')
+	audioFile = path + input + '.wav'
+	print(audioFile)
+	r = sr.Recognizer()
+	with sr.AudioFile(audioFile) as source:
+		audio = r.record(source) #read audio file
+	try:
+		return r.recognize_google(audio)
+	except sr.UnknownValueError:
+		return " " #cannot understand audio ):
+	except sr.RequestError as e:
+		return " " #request error
+	return "hello world"
 
 #recordSound('out', 5)
-#playSound('out')
+#print(transribeSound('out'))

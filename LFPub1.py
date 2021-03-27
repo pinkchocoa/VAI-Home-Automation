@@ -3,7 +3,6 @@ import RPi.GPIO as GPIO
 import time
 from time import sleep
 from audio.micRec import micRec
-from audio.speakText import speakText
 
 def checkVoiceInput(said, inputs):
     
@@ -70,7 +69,7 @@ while True:
     if checkVoiceInput(said, ['light', 'on']):
    # if 'light' in said and 'on' in said:
         white()
-        MESSAGE = 'LOn'
+        MESSAGE = 'Light On'
         mqttc.publish(TOPIC, MESSAGE)
         print('Published to ' + MQTTBROKER + ': ' + TOPIC + ':' + MESSAGE)
         time.sleep(1)
@@ -78,7 +77,7 @@ while True:
     elif checkVoiceInput(said, ["light", "off"]):
     #if 'light' in micRec() and 'off' in micRec():
         turnOff()
-        MESSAGE = 'LOff'
+        MESSAGE = 'Light Off'
         mqttc.publish(TOPIC,MESSAGE)
         print('Published to ' + MQTTBROKER + ': ' + TOPIC + ':' + MESSAGE)
         time.sleep(1)
@@ -86,7 +85,7 @@ while True:
     elif checkVoiceInput(said, ["fan", "on"]):
         
         GPIO.output(FAN_PIN1, False)
-        MESSAGE = 'FOn'
+        MESSAGE = 'Fan On'
         mqttc.publish(TOPIC, MESSAGE)
         
         print('Published to ' + MQTTBROKER + ': ' + TOPIC + ':' + MESSAGE)
@@ -94,7 +93,7 @@ while True:
         
     elif checkVoiceInput(said, ["fan", "off"]):
         GPIO.output(FAN_PIN1,True )
-        MESSAGE = 'FOff'
+        MESSAGE = 'Fan Off'
         mqttc.publish(TOPIC,MESSAGE)
         print('Published to ' + MQTTBROKER + ': ' + TOPIC + ':' + MESSAGE)
         time.sleep(1)

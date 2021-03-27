@@ -2,6 +2,7 @@ import paho.mqtt.client as mqtt
 import RPi.GPIO as GPIO
 import time
 from time import sleep
+from audio.speakText import speakText
 
 GPIO.setmode(GPIO.BCM)
 
@@ -41,7 +42,7 @@ def on_message(client, userdata, msg):
     txt = str(msg.payload)
     txt = txt.split("'")[1]
     print("txt: ", txt)
-    
+    speakText("hi jas")
     
     if txt == 'LOn':
         print("test")

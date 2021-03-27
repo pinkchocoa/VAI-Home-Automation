@@ -41,14 +41,21 @@ def on_message(client, userdata, msg):
     txt = str(msg.payload)
     txt = txt.split("'")[1]
     print("txt: ", txt)
-    if txt == 'Off':
+    if txt == 'LOn':
         print("test")
-        turnOff()
-         GPIO.output(FAN_PIN2, GPIO.HIGH)
-    elif txt == 'On':
-        print("anything")
         white()
-         GPIO.output(FAN_PIN2, GPIO.LOW)
+        
+        
+    elif txt == 'LOff':
+        print("anything")
+        turnOff()
+        
+    elif txt == 'FOn':
+        GPIO.output(FAN_PIN2, GPIO.HIGH)
+    
+    elif txt == 'FOff':
+        GPIO.output(FAN_PIN2, GPIO.LOW)
+        
     print(MQTTBROKER + ': <' + msg.topic + '> :' + str(msg.payload))
     
 client = mqtt.Client()

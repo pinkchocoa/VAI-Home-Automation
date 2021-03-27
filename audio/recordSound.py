@@ -36,8 +36,8 @@ def transribeSound(input, path="/home/pi/"):
 		audio = r.record(source) #read audio file
 	try:
 		txt =  r.recognize_google(audio)
-		txt.replace("'", "")
-		txt.replace('"', '')
+		txt = txt.replace("'", "")
+		txt = txt.replace('"', '')
 		return txt
 	except sr.UnknownValueError:
 		return " " #cannot understand audio ):

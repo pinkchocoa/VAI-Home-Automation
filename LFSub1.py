@@ -41,6 +41,8 @@ def on_message(client, userdata, msg):
     txt = str(msg.payload)
     txt = txt.split("'")[1]
     print("txt: ", txt)
+    
+    
     if txt == 'LOn':
         print("test")
         white()

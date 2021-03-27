@@ -17,9 +17,9 @@ def speakText(input):
 #cmdOut = '--stdout > /home/pi/Desktop/text.wav ' #store the voice file
 
 #testing
-text = input("Enter text: ")
-print("speaking... ", text)
+#text = input("Enter text: ")
+#print("speaking... ", text)
 #text = text.replace(' ', '_') #need to replace spaces with underscores to identify as a command
 #cmdOut += text
-print(speakText(text))
+#print(speakText(text))
 

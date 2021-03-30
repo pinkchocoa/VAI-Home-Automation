@@ -42,22 +42,21 @@ def on_message(client, userdata, msg):
     txt = str(msg.payload)
     txt = txt.split("'")[1]
     print("txt: ", txt)
-    speakText("hi jas")
     
-    if txt == 'LOn':
-        print("test")
+    if 'Record Voice' in txt:
+        txt=txt[len('Record Voice'):]
+        print(txt)
+    elif txt == 'Light On':
         white()
-        
-        
-    elif txt == 'LOff':
-        print("anything")
+    elif txt == 'Light Off':
         turnOff()
-        
-    elif txt == 'FOn':
+    elif txt == 'Fan On':
         GPIO.output(FAN_PIN2, GPIO.HIGH)
     
-    elif txt == 'FOff':
+    elif txt == 'Fan Off':
         GPIO.output(FAN_PIN2, GPIO.LOW)
+        
+    speakText(txt)
         
     print(MQTTBROKER + ': <' + msg.topic + '> :' + str(msg.payload))
     

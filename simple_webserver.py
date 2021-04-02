@@ -2,17 +2,17 @@ import RPi.GPIO as GPIO
 import os
 from time import sleep
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from fileio import file_to_set, write_file
 
 
-host_name = '172.20.10.3'  # Change this to your Raspberry Pi IP address
+host_name = 'jas.local'  # Change this to your Raspberry Pi IP address
 host_port = 8000
 
-    
 class MyServer(BaseHTTPRequestHandler):
     """ A special implementation of BaseHTTPRequestHander for reading data from
         and control GPIO of a Raspberry Pi
     """
-
+    data = set()
     def do_HEAD(self):
         """ do_HEAD() can be tested use curl command
             'curl -I http://server-ip-address:port'
@@ -48,36 +48,22 @@ class MyServer(BaseHTTPRequestHandler):
         temp = os.popen("/opt/vc/bin/vcgencmd measure_temp").read()
         self.do_HEAD()
         status = ''
-        redPin = 5
-        greenPin = 6
-        bluePin = 13
+        #check textfile
+        textfile = 'status.txt'
+        
         if self.path=='/':
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setwarnings(False)
-            #set pins as outputs
-            GPIO.setup(redPin,GPIO.OUT)
-            GPIO.setup(greenPin,GPIO.OUT)
-            GPIO.setup(bluePin,GPIO.OUT)
-
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setwarnings(False)
-            GPIO.setup(20, GPIO.OUT)
+            pass
         elif self.path=='/led/on':
-            GPIO.output(redPin,GPIO.LOW)
-            GPIO.output(greenPin,GPIO.LOW)
-            GPIO.output(bluePin,GPIO.LOW)
             status='LED is On'
         elif self.path=='/led/off':
-            GPIO.output(redPin,GPIO.HIGH)
-            GPIO.output(greenPin,GPIO.HIGH)
-            GPIO.output(bluePin,GPIO.HIGH)
             status='LED is Off'
         elif self.path=='/fan/on':
-            GPIO.output(20, GPIO.LOW)
             status='Fan is On'
         elif self.path=='/fan/off':
-            GPIO.output(20, GPIO.HIGH)
             status='Fan is Off'
+            
+        write_file(textfile,status)
+        print(status)
         self.wfile.write(html.format(temp[5:], status).encode("utf-8"))
 
 

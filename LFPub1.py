@@ -126,15 +126,15 @@ while True:
     textfile = 'status.txt'
     #if textfile is not empty
     content = file_to_set (textfile)
-    if textfile is not None:
-         #if not content:
-            #print("There's nothing in textfile.")
-            #return False
-        
-        if content:
-            content = content.pop()
-            print(content)
-            delete_file_contents(textfile)
+    print(content)
+    for i in content:
+        if i == "":
+            continue
+        else:
+            content = i
+            break
+        print(content)
+
             
             
     
@@ -181,5 +181,8 @@ while True:
         mqttc.publish(TOPIC, MESSAGE)
         print('Published to ' + MQTTBROKER + ': ' + TOPIC + ':' + MESSAGE)
         time.sleep(2)
-        
+    print("deleting contents...")
+    print(content)
+    delete_file_contents(textfile)        
 mqttc.loop(1)
+

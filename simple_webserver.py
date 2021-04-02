@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import os
 from time import sleep
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from fileio import file_to_set, write_file
+from fileio import file_to_set, append_to_file
 
 
 host_name = 'jas.local'  # Change this to your Raspberry Pi IP address
@@ -62,7 +62,9 @@ class MyServer(BaseHTTPRequestHandler):
         elif self.path=='/fan/off':
             status='Fan is Off'
             
-        write_file(textfile,status)
+        append_to_file(textfile,status)
+        content = file_to_set(textfile)
+        print(content)
         print(status)
         self.wfile.write(html.format(temp[5:], status).encode("utf-8"))
 

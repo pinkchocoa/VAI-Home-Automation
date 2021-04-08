@@ -11,9 +11,7 @@ import smbus
     
 #Temp
 i2c_ch = 1
-
 i2c_address = 0x48
-
 reg_temp = 0x00
 reg_config = 0x01
 
@@ -87,54 +85,38 @@ def RCtime (RCpin):
            reading += 1
     return reading
 
-count = 0
-
 while True:
     #Light
     print (RCtime(17))
-    #turnOff()
-    #GPIO.setup(20,GPIO.OUT)
-    #ldrdata = urlopen("https://api.thingspeak.com/update?api_key=WMHWC7KXM98IY9EK&field3=" + str(RCtime(18)))
-    #ldrdata.close()
+    
     #Fan
     temperature = read_temp()
-    #ThingSpeak
-    #data1 = urlopen("https://api.thingspeak.com/update?api_key=WMHWC7KXM98IY9EK&field1=" + str(temperature))
-    #data1.close()
     
     print(round(temperature, 2), "C")
     time.sleep(1)
     
     if (RCtime(17)) > 6000:
         #Light
-        
         white()
-        #GPIO.output(20, GPIO.HIGH)
+        
         #Light
         print("Led On")
         
     else:
         #Light
         turnOff()
-        #GPIO.output(20, GPIO.LOW)
         print("Led Off")
     
 
-    if temperature > 28.00:
+    if temperature > 29.00:
         #Fan
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         FAN_PIN = 20
-        #FAN_PIN1 = 12
+       
         GPIO.setup(FAN_PIN, GPIO.OUT)
         GPIO.output(FAN_PIN, GPIO.LOW)
-        #count = count+1
-        #data2 = urlopen("https://api.thingspeak.com/update?api_key=1DAY7XC8O4PYM4MS&field1=" + str(count))
-        #data2.close()
-        #print(count, "times turned on")
-        #GPIO.setup(FAN_PIN1, GPIO.OUT)
-        #GPIO.output(FAN_PIN1, True)
-        #GPIO.output(6, GPIO.HIGH)
+       
         #Fan
         time.sleep(0.5)
         
@@ -143,10 +125,5 @@ while True:
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         FAN_PIN = 20
-        #FAN_PIN1 = 12
         GPIO.setup(FAN_PIN, GPIO.OUT)
         GPIO.output(FAN_PIN, GPIO.HIGH)
-        #GPIO.setup(FAN_PIN1, GPIO.OUT)
-        #GPIO.output(FAN_PIN1, False)
-        
-        

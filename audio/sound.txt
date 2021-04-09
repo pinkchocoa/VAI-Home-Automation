@@ -10,7 +10,7 @@ $ pick analog
 (remember to do ur apt-get update/upgrade)
 (best to reboot after all these)
 $ sudo apt-get install pulseaudio pavucontrol
-$ pact1 list | grep 'Sink'
+$ pactl list | grep 'Sink'
 above command list ur sound interfaces, it should be '1' for your analog interface by default
 $ pactl -- set-sink-volume 1 +200%
 replace '1' with number of your choice if necessary

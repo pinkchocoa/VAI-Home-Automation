@@ -33,7 +33,7 @@ GPIO.setup(bluePin,GPIO.OUT)
 
 FAN_PIN1 = 20
 GPIO.setup(FAN_PIN1, GPIO.OUT)
-GPIO.setup(FAN_PIN1, True)
+GPIO.output(FAN_PIN1, True)
 
 def turnOff():
     GPIO.output(redPin,GPIO.HIGH)

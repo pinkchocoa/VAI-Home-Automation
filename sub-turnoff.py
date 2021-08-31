@@ -1,28 +1,28 @@
 import paho.mqtt.client as mqtt
-import RPi.GPIO as GPIO, time, os
+import RPi.GPIO as GPIO
 import time
 from time import sleep
 
 GPIO.setmode(GPIO.BCM)
-
 GPIO.setwarnings(False)
 
 #set fan pin 
-FAN_PIN1 = 20
+FAN_PIN2 = 16
 
 #set red,green and blue pins
-redPin = 5
-greenPin = 6
-bluePin = 13
+redPin = 13
+greenPin = 19
+bluePin = 26
 
 #set pins as outputs
+GPIO.setup(FAN_PIN2, GPIO.OUT)
 GPIO.setup(redPin,GPIO.OUT)
 GPIO.setup(greenPin,GPIO.OUT)
 GPIO.setup(bluePin,GPIO.OUT)
 
 def fanOff():
     #set as fan off
-    GPIO.setup(FAN_PIN1, True)
+    GPIO.output(FAN_PIN2,True)
 
 def lightOff():
     GPIO.output(redPin,GPIO.HIGH)
@@ -31,3 +31,4 @@ def lightOff():
     
 fanOff()
 lightOff()
+

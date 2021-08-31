@@ -8,8 +8,6 @@ from audio.recordSound import recordSound, transribeSound
 from audio.speakText import speakText
 from fileio import file_to_set, write_file, append_to_file, delete_file_contents
 
-GPIO.setmode(GPIO.BCM)
-
 def checkInput(said, inputs):
     if said is None or not said:
 #         print("Nothing is said")
@@ -34,7 +32,7 @@ GPIO.setup(greenPin,GPIO.OUT)
 GPIO.setup(bluePin,GPIO.OUT)
 
 FAN_PIN1 = 20
-GPIO.setup(FAN_PIN1, GPIO.OUT)
+GPIO.setup(FAN_PIN1, True)
 
 def turnOff():
     GPIO.output(redPin,GPIO.HIGH)
@@ -46,6 +44,7 @@ def white():
     GPIO.output(greenPin,GPIO.LOW)
     GPIO.output(bluePin,GPIO.LOW)
 
+turnOff()
 
 LIGHT_BTN = 18
 GPIO.setup(LIGHT_BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)

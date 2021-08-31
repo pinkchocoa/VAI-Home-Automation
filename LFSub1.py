@@ -17,7 +17,7 @@ GPIO.setup(bluePin,GPIO.OUT)
 
 FAN_PIN2 = 16
 GPIO.setup(FAN_PIN2, GPIO.OUT)
-GPIO.output(FAN_PIN1, True)
+GPIO.output(FAN_PIN2, True)
 
 def turnOff():
     GPIO.output(redPin, GPIO.HIGH)
@@ -48,14 +48,19 @@ def on_message(client, userdata, msg):
     if 'Record Voice' in txt:
         txt=txt[len('Record Voice'):]
         print(txt)
+    elif txt == "Turn On":
+        GPIO.output(FAN_PIN2, False)
+        white()
     elif txt == 'Light On':
         white()
     elif txt == 'Light Off':
         turnOff()
     elif txt == 'Fan On':
         GPIO.output(FAN_PIN2, False)
-    
     elif txt == 'Fan Off':
+        GPIO.output(FAN_PIN2, True)
+    elif txt == 'Byebye':
+        turnOff()
         GPIO.output(FAN_PIN2, True)
         
     speakText(txt)

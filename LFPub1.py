@@ -83,7 +83,14 @@ while True:
         mqttc.publish(TOPIC, MESSAGE)
         print('Published to ' + MQTTBROKER + ': ' + TOPIC + ':' + MESSAGE)
         time.sleep(2)
-        
+    
+    elif checkInput(said, ["am", "home"]) or checkInput(said, ["I'm home"]):
+        white()
+        GPIO.output(FAN_PIN1, False)
+        MESSAGE = "Turn On"
+        mqttc.publish(TOPIC,MESSAGE)
+        print('Published to ' + MQTTBROKER + ': ' + TOPIC + ':' + MESSAGE)
+        time.sleep(2)
             
     elif checkInput(said, ["light", "off"]) or checkInput(content, ['LED', 'Off']):
         turnOff()
@@ -94,7 +101,6 @@ while True:
         
     
     elif checkInput(said, ["fan", "on"]) or checkInput(content, ['Fan', 'On']):
-        
         GPIO.output(FAN_PIN1, False)
         MESSAGE = 'Fan On'
         mqttc.publish(TOPIC, MESSAGE)
@@ -109,6 +115,14 @@ while True:
         print('Published to ' + MQTTBROKER + ': ' + TOPIC + ':' + MESSAGE)
         time.sleep(2)
     
+    elif checkInput(said, ["bye-bye"]) or checkInput(said, ['Bye-bye']) or checkInput(said, ["goodbye"]) or checkInput(said, ['Goodbye']):
+        GPIO.output(FAN_PIN1,True)
+        turnOff()
+        MESSAGE = 'Byebye'
+        mqttc.publish(TOPIC,MESSAGE)
+        print('Published to ' + MQTTBROKER + ': ' + TOPIC + ':' + MESSAGE)
+        time.sleep(2)
+        
     elif checkInput(said, ["send", "message"]):
         MESSAGE = 'Record Voice'
         speakText('recording voice')

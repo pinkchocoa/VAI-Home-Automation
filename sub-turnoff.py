@@ -29,6 +29,15 @@ def lightOff():
     GPIO.output(greenPin,GPIO.HIGH)
     GPIO.output(bluePin,GPIO.HIGH)
     
+def fanOn():
+    #set as fan off
+    GPIO.output(FAN_PIN2, False)
+
+def lightOn():
+    GPIO.output(redPin,GPIO.LOW)
+    GPIO.output(greenPin,GPIO.LOW)
+    GPIO.output(bluePin,GPIO.LOW)
+    
 fanOff()
 lightOff()
 

@@ -4,6 +4,7 @@ import time
 from time import sleep
 from audio.speakText import speakText
 
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
 redPin = 13
@@ -16,6 +17,7 @@ GPIO.setup(bluePin,GPIO.OUT)
 
 FAN_PIN2 = 16
 GPIO.setup(FAN_PIN2, GPIO.OUT)
+GPIO.output(FAN_PIN1, True)
 
 def turnOff():
     GPIO.output(redPin, GPIO.HIGH)
@@ -51,10 +53,10 @@ def on_message(client, userdata, msg):
     elif txt == 'Light Off':
         turnOff()
     elif txt == 'Fan On':
-        GPIO.output(FAN_PIN2, GPIO.HIGH)
+        GPIO.output(FAN_PIN2, False)
     
     elif txt == 'Fan Off':
-        GPIO.output(FAN_PIN2, GPIO.LOW)
+        GPIO.output(FAN_PIN2, True)
         
     speakText(txt)
         

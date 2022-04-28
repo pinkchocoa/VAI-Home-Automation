@@ -1,3 +1,3 @@
-# CSC1010-VAI-Home-Automation
+# VAI-Home-Automation
 
 https://youtu.be/iEeEd7wkouA
